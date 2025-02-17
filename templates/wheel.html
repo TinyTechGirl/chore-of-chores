@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chore Wheel</title>
+    <style>
+        /* Simple styling for the wheel and button */
+        #wheel {
+            width: 300px;
+            height: 300px;
+            border: 10px solid #333;
+            border-radius: 50%;
+            margin: auto;
+            position: relative;
+        }
+        #spin-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+        #result {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Chore Wheel</h1>
+    <p style="text-align:center;">Logged in as: {{ current_user.username }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+    <div id="wheel">
+        <!-- This div represents the wheel -->
+    </div>
+    <button id="spin-button">Spin the Wheel</button>
+    <div id="result"></div>
+    
+    <script>
+        document.getElementById('spin-button').addEventListener('click', function() {
+            var wheel = document.getElementById('wheel');
+            // Generate a random rotation (at least two full spins)
+            var rotation = Math.floor(Math.random() * 360) + 720;
+            wheel.style.transition = "transform 3s ease-out";
+            wheel.style.transform = "rotate(" + rotation + "deg)";
+            
+            // After the spin animation, call the backend
+            setTimeout(function() {
+                fetch('/spin', {method: 'POST'})
+                .then(response => response.json())
+                .then(data => {
+                    if(data.error) {
+                        document.getElementById('result').innerText = data.error;
+                    } else {
+                        document.getElementById('result').innerText = "Your chore: " + data.chore + " (" + data.type + ")";
+                    }
+                });
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

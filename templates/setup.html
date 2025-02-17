@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chore Wheel Setup</title>
+</head>
+<body>
+    <h1>Set Up Your Chore Wheel</h1>
+    <p>Enter your chores below (one per line for each category):</p>
+    <form method="post">
+        <h3>Daily Chores</h3>
+        <textarea name="daily" rows="5" cols="40" placeholder="E.g., Make bed"></textarea>
+        
+        <h3>Weekly Chores</h3>
+        <textarea name="weekly" rows="5" cols="40" placeholder="E.g., Clean bathroom"></textarea>
+        
+        <h3>Monthly Chores</h3>
+        <textarea name="monthly" rows="5" cols="40" placeholder="E.g., Deep clean kitchen"></textarea>
+        
+        <br><br>
+        <input type="submit" value="Save Chores">
+    </form>
+    <p><a href="{{ url_for('wheel') }}">Go to Chore Wheel</a></p>
+</body>
+</html>
+
