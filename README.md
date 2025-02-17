@@ -1,1 +1,1 @@
-# chore-of-chores
+# wheel-of-chores
